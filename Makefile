@@ -117,15 +117,17 @@ $(METRICS): $(PREDICTIONS) scripts/evaluate.py
 # Clean generated files
 clean:
 	@echo Cleaning generated files...
-	@if exist $(DATA_RAW)\*.csv del /Q $(DATA_RAW)\*.csv 2>nul
-	@if exist $(DATA_PROCESSED)\*.csv del /Q $(DATA_PROCESSED)\*.csv 2>nul
-	@if exist $(FEATURES_DIR)\*.csv del /Q $(FEATURES_DIR)\*.csv 2>nul
-	@if exist $(MODELS_DIR)\*.pkl del /Q $(MODELS_DIR)\*.pkl 2>nul
-	@if exist $(RESULTS_DIR)\*.csv del /Q $(RESULTS_DIR)\*.csv 2>nul
-	@if exist $(RESULTS_DIR)\*.txt del /Q $(RESULTS_DIR)\*.txt 2>nul
-	@if exist __pycache__ rmdir /S /Q __pycache__ 2>nul
-	@if exist scripts\__pycache__ rmdir /S /Q scripts\__pycache__ 2>nul
+	-@if exist "$(DATA_RAW)\*.csv" del /Q "$(DATA_RAW)\*.csv"
+	-@if exist "$(DATA_PROCESSED)\*.csv" del /Q "$(DATA_PROCESSED)\*.csv"
+	-@if exist "$(FEATURES_DIR)\*.csv" del /Q "$(FEATURES_DIR)\*.csv"
+	-@if exist "$(MODELS_DIR)\*.pkl" del /Q "$(MODELS_DIR)\*.pkl"
+	-@if exist "$(RESULTS_DIR)\*.csv" del /Q "$(RESULTS_DIR)\*.csv"
+	-@if exist "$(RESULTS_DIR)\*.txt" del /Q "$(RESULTS_DIR)\*.txt"
+	-@if exist "__pycache__" rmdir /S /Q "__pycache__"
+	-@if exist "scripts\__pycache__" rmdir /S /Q "scripts\__pycache__"
 	@echo Cleaned all generated artifacts
+
+
 
 # Help target
 help:

@@ -17,15 +17,16 @@ def preprocess_data(input_file, output_file):
     
     # Handle missing values
     # Age: fill with median
-    processed_df['age'].fillna(processed_df['age'].median(), inplace=True)
+    processed_df['age'] = processed_df['age'].fillna(processed_df['age'].median())
+    processed_df['age'] = processed_df['age'].astype(int)
     
     # Embarked: fill with mode
     if 'embarked' in processed_df.columns:
-        processed_df['embarked'].fillna(processed_df['embarked'].mode()[0], inplace=True)
+        processed_df['embarked'] = processed_df['embarked'].fillna(processed_df['embarked'].mode()[0])
     
     # Fare: fill with median
     if 'fare' in processed_df.columns:
-        processed_df['fare'].fillna(processed_df['fare'].median(), inplace=True)
+        processed_df['fare'] = processed_df['fare'].fillna(processed_df['fare'].median())
     
     # Drop columns with too many missing values or not useful
     columns_to_drop = ['deck', 'embark_town', 'alive']
@@ -54,11 +55,11 @@ def preprocess_data(input_file, output_file):
     if 'class' in processed_df.columns:
         class_dummies = pd.get_dummies(processed_df['class'], prefix='class', drop_first=True)
         processed_df = pd.concat([processed_df, class_dummies], axis=1)
-        processed_df.drop('class', axis=1, inplace=True)
+        processed_df.drop('class', axis=1)
     
     
     # Drop any remaining non-numeric columns except 'survived'
-    non_numeric_cols = processed_df.select_dtypes(include=['object']).columns.tolist()
+    non_numeric_cols = processed_df.select_dtypes(include=['object', 'str']).columns.tolist()
     processed_df.drop(columns=non_numeric_cols, inplace=True, errors='ignore')
     
     # Save processed data

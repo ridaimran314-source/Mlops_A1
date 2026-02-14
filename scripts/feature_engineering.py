@@ -21,7 +21,7 @@ def engineer_features(input_file, output_file):
     if 'age' in feature_df.columns:
         feature_df['age_bin'] = pd.cut(feature_df['age'], 
                                         bins=[0, 12, 18, 35, 60], 
-                                        labels=[0, 1, 2, 3]).astype(int)
+                                        labels=[0, 1, 2, 3])
     
     # Fare bins
     if 'fare' in feature_df.columns:
