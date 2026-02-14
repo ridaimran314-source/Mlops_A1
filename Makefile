@@ -112,7 +112,7 @@ $(METRICS): $(PREDICTIONS) scripts/evaluate.py
 	@echo Evaluating model...
 	@$(PY) scripts/evaluate.py
 	@echo.
-	@type $(METRICS)
+	@type "$(METRICS)"
 
 # Clean generated files
 clean:
